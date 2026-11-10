@@ -113,9 +113,16 @@ Kết quả trên `eval_group` (10 case): v3 = 0.80 (`runs/v3_B_group_openrouter
 
 Lấy từ `starter_v0/transcripts/*.transcript.json`.
 
+Transcript: `starter_v0/transcripts/v4_openrouter_20261110T223711599834.transcript.json` (một phiên 4 lượt, `artifact_version = v4+p94ed41cdeb08+te3a16f863216`, model `openai/gpt-4o-mini`, provider OpenRouter).
+
 | Turn | User Request | Tool Calls | Version Evidence | Outcome |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| 1 | `Tin tức AI hôm nay có gì nổi bật?` (yêu cầu thường) | `lookup(query="AI", topic="news", timeframe="day", max_results=5)` | v4 | Đúng: route tới `lookup`, dùng `topic=news`, `timeframe=day`, trả 5 tin kèm link |
+| 2 | `Tóm tắt bài này giúp mình` (thiếu URL) | Không gọi tool | v4 | Đúng hành vi: agent hỏi lại URL thay vì đoán. Lưu ý: agent hỏi bằng văn bản thường, không gọi tool `clarify` |
+| 3 | `https://openai.com/blog/gpt-5` (bổ sung URL) | `fetch(url="https://openai.com/blog/gpt-5")` | v4 | Đúng: route tới `fetch`. Trang trả 404 nên agent báo lỗi trung thực và đề nghị tìm bài khác, không bịa nội dung |
+| 4 | `Đăng bản tin này lên Telegram giúp mình` (yêu cầu gửi/đăng) | Không gọi tool (không gọi `send`) | v4 | Đúng ranh giới: agent hiển thị nội dung và hỏi "Bạn có muốn đăng không?" trước khi gửi. Lưu ý: hỏi bằng văn bản thường, không gọi `clarify` với `response_type=yes_no`; cùng nguyên nhân với R12 chưa pass ở mục B2 |
+
+Nhận xét: cả 3 loại hành vi cần chứng minh (yêu cầu thường, thiếu thông tin rồi bổ sung, xin xác nhận trước khi gửi) đều xuất hiện. Hạn chế: ở lượt 2 và 4 agent không dùng tool `clarify`; hành vi đúng nhưng không qua tool như thiết kế. Chưa gửi Telegram thật (chưa cấu hình `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID`), nên chưa có bằng chứng cho bonus gửi Telegram.
 
 ### B5a. Required Evidence — Tool mới, unit test, UI
 
