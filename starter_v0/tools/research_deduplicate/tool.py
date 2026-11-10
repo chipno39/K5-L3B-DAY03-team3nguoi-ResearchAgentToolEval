@@ -6,7 +6,6 @@ from urllib.parse import urlsplit, urlunsplit
 
 
 def _normalize_url(url: str) -> str:
-    """Normalize a URL for duplicate comparison."""
     url = url.strip()
 
     if not url:
@@ -32,7 +31,6 @@ def _normalize_url(url: str) -> str:
 def deduplicate_results(
     items: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Remove duplicate research results based on URL."""
     try:
         if items is None:
             items = []

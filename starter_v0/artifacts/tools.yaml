@@ -16,21 +16,21 @@
 tools:
   # ---------------- Core tools ----------------
   - name: clarify
-    description: "Hỏi người dùng một câu ngắn khi THIẾU thông tin bắt buộc (handle tài khoản, URL, hoặc chủ đề tìm kiếm). Chỉ dùng khi thông tin đó thật sự chưa có. KHÔNG dùng khi đã có đủ thông tin để gọi tool khác. KHÔNG dùng để xin xác nhận gửi (dùng response_type=yes_no cho việc đó)."
+    description: "Hỏi người dùng một câu ngắn trong hai trường hợp: (a) THIẾU thông tin bắt buộc (handle tài khoản, URL, chủ đề tìm kiếm) → response_type=text; (b) MỌI yêu cầu gửi, đăng hoặc ghi (kể cả khi chưa rõ nội dung) → BẮT BUỘC response_type=yes_no, ví dụ 'Bạn muốn đăng nội dung này lên Telegram không?'. KHÔNG dùng khi đã có đủ thông tin để gọi tool khác. KHÔNG dùng cho yêu cầu ngoài phạm vi research (đặt vé, mua hàng, thao tác tài khoản, lập trình): khi đó trả lời trực tiếp rằng agent không làm được việc đó và không gọi tool."
     parameters:
       type: object
       properties:
         question: {type: string, default: "", description: "Câu hỏi ngắn, nêu rõ thông tin còn thiếu"}
-        response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "text (mặc định) khi hỏi thông tin mới; yes_no khi xin xác nhận có/không; choice khi đưa ra các lựa chọn trong options"}
+        response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "text khi hỏi thông tin còn thiếu; yes_no BẮT BUỘC khi xin xác nhận gửi, đăng hoặc ghi (kể cả khi chưa rõ nội dung); choice khi đưa ra các lựa chọn trong options"}
         options: {type: array, default: [], items: {type: string}, description: "Các lựa chọn, chỉ dùng khi response_type=choice"}
-      required: [question]
+      required: [question, response_type]
 
   - name: timeline
-    description: "Lấy các bài đăng gần đây của MỘT tài khoản cụ thể. Dùng khi người dùng nêu rõ tên tài khoản (ví dụ 'tweet của @sama', 'sama vừa đăng gì'). KHÔNG dùng để tìm theo từ khóa (dùng social_search). KHÔNG dùng khi chưa biết tài khoản (dùng clarify)."
+    description: "Lấy các bài đăng gần đây của MỘT tài khoản cụ thể. Dùng khi người dùng nêu rõ tên tài khoản (ví dụ 'tweet của @sama', 'sama vừa đăng gì'). KHÔNG dùng để tìm theo từ khóa (dùng social_search). KHÔNG dùng khi chưa biết tài khoản (dùng clarify). Nếu người dùng nêu tên người nổi tiếng, đổi sang handle: Yann LeCun → ylecun; Sam Altman → sama; Demis Hassabis → demishassabis."
     parameters:
       type: object
       properties:
-        screenname: {type: string, default: "", description: "Handle KHÔNG kèm '@' (ví dụ '@sama' → 'sama')"}
+        screenname: {type: string, default: "", description: "Handle KHÔNG kèm '@' (ví dụ '@sama' → 'sama'; 'Yann LeCun' → 'ylecun')"}
         limit: {type: integer, default: 5, description: "Số bài cần lấy. Dùng đúng số người dùng yêu cầu (ví dụ 'lấy 3 bài' → 3); mặc định 5"}
       required: [screenname]
 
@@ -56,7 +56,7 @@ tools:
       required: [query]
 
   - name: fetch
-    description: "Đọc nội dung của MỘT URL cụ thể do người dùng đưa ra. KHÔNG dùng khi chưa có URL (dùng clarify). KHÔNG dùng để tìm kiếm (dùng lookup hoặc social_search)."
+    description: "Đọc nội dung của MỘT URL cụ thể do người dùng đưa ra. Khi tin nhắn có link http/https, dùng fetch NGAY, kể cả khi yêu cầu là 'tóm tắt', 'đọc', 'bài này' — không hỏi lại. KHÔNG dùng khi chưa có URL (dùng clarify). KHÔNG dùng để tìm kiếm (dùng lookup hoặc social_search)."
     parameters:
       type: object
       properties:
@@ -86,12 +86,12 @@ tools:
 
   # ---------------- Bonus tools ----------------
   - name: send
-    description: "Gửi một đoạn văn bản đi."
+    description: "Gửi văn bản lên Telegram. CHỈ gọi khi người dùng đã xem nội dung cuối và xác nhận rõ ràng. Lần gửi đầu tiên trong hội thoại LUÔN phải hỏi xác nhận bằng clarify với response_type=yes_no, kể cả khi người dùng nói 'ok', 'gửi luôn' hay 'gửi đi'. Chỉ đặt confirmed=true sau khi người dùng đã trả lời yes cho câu hỏi xác nhận đó."
     parameters:
       type: object
       properties:
         text: {type: string, default: "", description: "Nội dung"}
-        confirmed: {type: boolean, default: false, description: "Cờ xác nhận"}
+        confirmed: {type: boolean, default: false, description: "false ở lần gọi đầu tiên trong hội thoại, kể cả khi người dùng nói 'ok' hay 'gửi luôn'; true chỉ sau khi clarify yes_no đã được trả lời yes"}
       required: [text]
 
   - name: policy
