@@ -1,4 +1,4 @@
-# Báo cáo cá nhân — 2A202603945_VuLuongDuy
+# Báo cáo cá nhân — VuLuongDuy-2A202603945
 
 ## 1. Thông tin thành viên
 
