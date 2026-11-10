@@ -62,7 +62,7 @@ UI (`starter_v0/app.py`) dùng chung vòng lặp tool với `chat.py`, giao di�
 ## 3. Giải pháp
 
 - **`system_prompt.md` (giữ ở bản v1):** bỏ các chỉ dẫn xấu của starter ("đừng hỏi, cứ đoán", "gửi luôn", "chỉ một bước"); thay bằng: thiếu thông tin thì gọi `clarify`; gửi phải xác nhận; không gọi tool khi không cần.
-- **`tools.yaml` (v2 → v4):** viết lại mô tả mỗi tool theo dạng "dùng khi nào / không dùng khi nào"; ghi rõ quy ước tham số (handle không có `@`, `topic=news`, `timeframe`, `search_type=Top|Latest`); làm rõ ranh giới xác nhận của `send` (hỏi `clarify` yes_no trước, `confirmed=true` chỉ sau khi người dùng đồng ý); mapping tên → handle (vd Yann LeCun → `ylecun`); `clarify.response_type` là bắt buộc.
+- **`tools.yaml` (v2 → v6, bản nộp là v6):** viết lại mô tả mỗi tool theo dạng "dùng khi nào / không dùng khi nào"; ghi rõ quy ước tham số (handle không có `@`, `topic=news`, `timeframe`, `search_type=Top|Latest`); làm rõ ranh giới xác nhận của `send` (hỏi `clarify` yes_no trước, `confirmed=true` chỉ sau khi người dùng đồng ý); mapping tên → handle (vd Yann LeCun → `ylecun`); `clarify.response_type` là bắt buộc. v6 hoàn thiện nốt 4 tool còn mô tả ngắn của starter (`format`, `policy`, `papers`, `paper_text`): khi nào dùng / không dùng, ý nghĩa từng `template`, mapping chủ đề → `policy_area`, `sort_by=submittedDate` cho "paper mới", `max_pages` theo số trang user yêu cầu.
 - **Tool mới `research_deduplicate`:** nhận danh sách kết quả, loại bỏ trùng theo URL đã chuẩn hóa, giữ bản đầu tiên, giữ item không có URL, không sửa danh sách đầu vào, trả error dict khi dữ liệu sai kiểu. Agent nên gọi khi đã có nhiều kết quả từ `lookup`/`social_search`/`fetch` và cần gộp bài trùng.
 
 ## 4. Kết quả — PHẦN B: Chi tiết và bằng chứng
@@ -80,8 +80,11 @@ Metric là `case_accuracy` trên bộ `eval_base` (20 case). Tất cả run có 
 | v3 | tools.yaml | Thêm tool `research_deduplicate` | 0.90 | 0.90 | `runs/v3_B_base_openrouter_20261110T185727578233.json` |
 | v4 | tools.yaml | Làm rõ ranh giới xác nhận, mapping tên → handle, `response_type` bắt buộc | 0.90 | 0.95 | `runs/v4_B_base_openrouter_20261110T192002429743.json` |
 | v5 (loại) | system_prompt.md | Rule xác nhận mạnh hơn trong prompt | 0.95 | 0.85 | `runs/v5_B_base_openrouter_20261110T192201652942.json` |
+| **v6 (bản nộp)** | tools.yaml | Model chọn sai `policy_area` (`all`/bỏ trống) vì description chỉ ghi "Nhóm"; mô tả rõ 4 tool còn lại + mapping chủ đề → `policy_area` sẽ sửa lỗi policy mà không làm giảm base/group (prompt giữ v1) | 0.95 | 0.95 | `runs/v6_B_base_openrouter_20261111T033521944265.json` |
 
-Kết quả trên `eval_group` (10 case): v3 = 0.80 (`runs/v3_B_group_openrouter_20261110T185805644931.json`), v4 = 0.90 (`runs/v4_B_group_openrouter_20261110T192038241104.json`), v5 = 0.80 (`runs/v5_B_group_openrouter_20261110T192220185840.json`). Các run này dùng bản G05 tạm (route tới `papers`). Sau khi G05 được đổi sang route tới tool mới `research_deduplicate`, chạy lại v4: **0.90** (9/10, G05 PASS) — `runs/v4_B_group_openrouter_20261111T031818497981.json` (bản chính thức cho B3).
+v6 không đổi điểm base (vẫn chỉ R12 FAIL) nhưng đo trên bộ **extension** (10 case policy/arXiv — nơi 4 tool này được dùng): v4 = 0.70 → v6 = **0.90**. E01 (tweet viral có phải fact → `source_citation`) và E08 (workflow research → `ai_research`) từ FAIL thành PASS; còn E06 FAIL (gọi `policy` nhưng bỏ `lookup`). Run: `runs/v4_B_extension_openrouter_20261111T033317775499.json` → `runs/v6_B_extension_openrouter_20261111T033619605580.json`.
+
+Kết quả trên `eval_group` (10 case): v3 = 0.80 (`runs/v3_B_group_openrouter_20261110T185805644931.json`), v4 = 0.90 (`runs/v4_B_group_openrouter_20261110T192038241104.json`), v5 = 0.80 (`runs/v5_B_group_openrouter_20261110T192220185840.json`). Các run này dùng bản G05 tạm (route tới `papers`). Sau khi G05 được đổi sang route tới tool mới `research_deduplicate`, chạy lại v4: **0.90** (9/10, G05 PASS) — `runs/v4_B_group_openrouter_20261111T031818497981.json`; v6 = **0.90** (cùng kết quả từng case) — `runs/v6_B_group_openrouter_20261111T033552562715.json` (bản chính thức cho B3).
 
 
 ### B2. Failure Analysis
@@ -97,7 +100,7 @@ Kết quả trên `eval_group` (10 case): v3 = 0.80 (`runs/v3_B_group_openrouter
 
 ### B3. Team Eval Cases
 
-`starter_v0/data/eval_group.json` — 5 single turn + 5 multi turn. Run chính thức: `starter_v0/runs/v4_B_group_openrouter_20261111T031818497981.json` (v4, `gpt-4o-mini`, 10/10 measured, 0 provider error) — **9/10 PASS**.
+`starter_v0/data/eval_group.json` — 5 single turn + 5 multi turn. Run chính thức: `starter_v0/runs/v6_B_group_openrouter_20261111T033552562715.json` (v6 — bản nộp, `gpt-4o-mini`, 10/10 measured, 0 provider error) — **9/10 PASS**; v4 cho kết quả từng case giống hệt (`runs/v4_B_group_openrouter_20261111T031818497981.json`).
 
 | Case ID | What It Tests | Expected Tool/Behavior | Result |
 |---|---|---|---|
@@ -168,11 +171,10 @@ Chi tiết đóng góp của từng thành viên nằm trong [TEAM.md](../../TEA
 ## 7. Hạn chế và hướng cải thiện — B6. Reflection
 
 - **Fix thuộc `system_prompt.md`:** bỏ chỉ dẫn xấu của starter (đoán thay vì hỏi, gửi không cần xác nhận, ép một bước) — v1 tăng 0.70 → 0.80.
-- **Fix thuộc `tools.yaml`:** mô tả "dùng/không dùng", quy ước tham số, mapping tên → handle, ranh giới xác nhận — v2 và v4 tăng 0.80 → 0.90 → 0.95.
+- **Fix thuộc `tools.yaml`:** mô tả "dùng/không dùng", quy ước tham số, mapping tên → handle, ranh giới xác nhận — v2 và v4 tăng 0.80 → 0.90 → 0.95; mapping chủ đề → `policy_area` (v6) tăng extension 0.70 → 0.90. Cả v2a và v5 (nhồi rule vào prompt) đều làm điểm giảm → rule routing/args nên nằm cạnh tool mà nó mô tả.
 - **Failure cần review thủ công:** R12 (base) và G08 (group). R12 kỳ vọng `response_type=yes_no` nhưng model hỏi "bạn muốn đăng nội dung nào?" bằng `text`, điều này hợp lý khi chưa có nội dung. G08 cho thấy agent hỏi thêm một lần dù người dùng đã xác nhận.
 - **Prompt/tools không chuyển được sang model khác:** trên UI với model free `nvidia/nemotron-3-ultra-550b-a55b:free` (prompt/tools v3), câu hỏi chỉ là "Tin tức AI hôm nay có gì nổi bật?" nhưng model gọi `lookup` → `format` → **`send(confirmed=true)`** dù user không yêu cầu gửi (`starter_v0/transcripts/v3_openrouter_ui_20261110T192155318540.transcript.json`); tin không đi được chỉ vì thiếu `TELEGRAM_CHAT_ID`. Kết luận: cờ `confirmed` do **model** tự điền nên không phải guardrail thật; về lâu dài cần xác nhận phía ứng dụng (người dùng bấm nút) thay vì tin vào args.
-- **Còn lại trong `tools.yaml`:** description của `format`, `policy`, `papers`, `paper_text` vẫn là bản ngắn của starter, chưa có "khi nào dùng / không dùng".
-- **Nếu có thêm một vòng:** chạy lặp R12 và G08 nhiều lần để đo độ dao động; thử làm rõ trong mô tả `send` khi nào câu trả lời của người dùng được coi là đã xác nhận (để G08 PASS mà G07 không FAIL lại).
+- **Nếu có thêm một vòng:** chạy lặp R12 và G08 nhiều lần để đo độ dao động; sửa E06 (yêu cầu "làm bản tin + kiểm tra policy" chỉ gọi `policy`, bỏ `lookup`); thử làm rõ trong mô tả `send` khi nào câu trả lời của người dùng được coi là đã xác nhận (để G08 PASS mà G07 không FAIL lại).
 
 
 ## 8. Tài liệu tham khảo
