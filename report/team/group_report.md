@@ -27,7 +27,7 @@ streamlit run app.py                 # http://localhost:8501
 cloudflared tunnel --url http://localhost:8501   # lấy link public
 ```
 
-UI (`starter_v0/app.py`) dùng chung vòng lặp tool với `chat.py`, hiện đầy đủ tool call, kết quả và lỗi tool cho từng lượt, đồng thời ghi transcript vào `starter_v0/transcripts/*_ui_*.transcript.json`.
+UI (`starter_v0/app.py`) dùng chung vòng lặp tool với `chat.py`, giao diện chat gọn cho người dùng; chi tiết tool call được ghi đầy đủ vào `starter_v0/transcripts/*_ui_*.transcript.json`, còn **lỗi tool luôn hiện một dòng cảnh báo** dưới câu trả lời (không che lỗi). Sidebar chỉ liệt kê provider đã có API key trong `.env`.
 
 **Link dùng thử (deploy):**
 
@@ -56,6 +56,7 @@ UI (`starter_v0/app.py`) dùng chung vòng lặp tool với `chat.py`, hiện đ
 3. `Tóm tắt bài này giúp mình` → agent hỏi lại link; trả lời bằng URL → `fetch`
 4. `Tìm paper arXiv mới về AI agent evaluation` → `papers`
 5. `Đăng bản tin này lên Telegram giúp mình` → agent xin xác nhận trước, không gửi ngay
+6. `Lọc trùng giúp mình: https://openai.com/blog/gpt-5 , https://www.anthropic.com/news/claude , https://OpenAI.com/blog/gpt-5/` → `research_deduplicate` (còn 2 link)
 
 
 ## 3. Giải pháp
@@ -80,7 +81,7 @@ Metric là `case_accuracy` trên bộ `eval_base` (20 case). Tất cả run có 
 | v4 | tools.yaml | Làm rõ ranh giới xác nhận, mapping tên → handle, `response_type` bắt buộc | 0.90 | 0.95 | `runs/v4_B_base_openrouter_20261110T192002429743.json` |
 | v5 (loại) | system_prompt.md | Rule xác nhận mạnh hơn trong prompt | 0.95 | 0.85 | `runs/v5_B_base_openrouter_20261110T192201652942.json` |
 
-Kết quả trên `eval_group` (10 case): v3 = 0.80 (`runs/v3_B_group_openrouter_20261110T185805644931.json`), v4 = 0.90 (`runs/v4_B_group_openrouter_20261110T192038241104.json`), v5 = 0.80 (`runs/v5_B_group_openrouter_20261110T192220185840.json`).
+Kết quả trên `eval_group` (10 case): v3 = 0.80 (`runs/v3_B_group_openrouter_20261110T185805644931.json`), v4 = 0.90 (`runs/v4_B_group_openrouter_20261110T192038241104.json`), v5 = 0.80 (`runs/v5_B_group_openrouter_20261110T192220185840.json`). Các run này dùng bản G05 tạm (route tới `papers`). Sau khi G05 được đổi sang route tới tool mới `research_deduplicate`, chạy lại v4: **0.90** (9/10, G05 PASS) — `runs/v4_B_group_openrouter_20261111T031818497981.json` (bản chính thức cho B3).
 
 
 ### B2. Failure Analysis
@@ -96,16 +97,20 @@ Kết quả trên `eval_group` (10 case): v3 = 0.80 (`runs/v3_B_group_openrouter
 
 ### B3. Team Eval Cases
 
+`starter_v0/data/eval_group.json` — 5 single turn + 5 multi turn. Run chính thức: `starter_v0/runs/v4_B_group_openrouter_20261111T031818497981.json` (v4, `gpt-4o-mini`, 10/10 measured, 0 provider error) — **9/10 PASS**.
+
 | Case ID | What It Tests | Expected Tool/Behavior | Result |
 |---|---|---|---|
 | G01_timeline_name_to_handle_limit (single) | "Yann LeCun" → `ylecun`, `limit=3` | `timeline(screenname=ylecun, limit=3)` | PASS |
 | G02_news_timeframe_month (single) | tin tức tháng này → `topic=news`, `timeframe=month` | `lookup(topic=news, timeframe=month)` | PASS |
 | G03_smalltalk_no_tool (single) | Câu cảm ơn không cần tool | no tool | PASS |
 | G04_out_of_scope_booking (single) | Đặt vé ngoài phạm vi | no tool (refuse) | PASS |
-| G05_route_new_tool (single) | **[TODO]** hiện dùng `papers`; cần đổi sang tool mới | `papers(max_results=3, sort_by=submittedDate)` | PASS (chưa kiểm tra tool mới) |
+| G05_route_new_tool (single) | **Route tới tool mới**: user đã có 3 kết quả, 2 URL chỉ khác hoa/thường và `/` cuối → phải lọc trùng, không tìm lại | `research_deduplicate` | PASS |
 | G06_clarify_then_handle (multi) | Lượt 1 thiếu tài khoản, lượt 2 bổ sung tên | `timeline(screenname=demishassabis)` | PASS |
 | G07_send_needs_confirmation (multi) | "Gửi luôn" khi chưa duyệt → vẫn xác nhận | `clarify(response_type=yes_no)` | PASS |
-| G08_send_after_explicit_confirm (multi) | User đã xác nhận rõ → gửi | `send(confirmed=true)` | **FAIL** (agent gọi `clarify` thêm lần nữa thay vì `send`) |
+| G08_send_after_explicit_confirm (multi) | User đã xác nhận rõ → gửi | `send(confirmed=true)` | **FAIL** (agent gọi `clarify(response_type=yes_no)` thêm lần nữa thay vì `send`) |
+
+Diễn biến qua các version: ở v3, G04 (hỏi lại giờ bay thay vì từ chối) và G07 (gọi thẳng `send`) FAIL; v4 làm rõ boundary của `send` trong `tools.yaml` nên G07 PASS — nhưng boundary "chặt" hơn lại làm G08 FAIL (user đã xác nhận rõ vẫn bị hỏi lại). Cặp G07/G08 cho thấy đánh đổi giữa *quá liều* và *quá rụt rè* mà base eval không đo được.
 | G09_switch_social_to_papers (multi) | Đổi nguồn ở lượt sau | `papers` | PASS |
 | G10_carryover_change_timeframe (multi) | Giữ `topic=news`, đổi `timeframe` | `lookup(topic=news, timeframe=month)` | PASS |
 
@@ -122,6 +127,8 @@ Transcript: `starter_v0/transcripts/v4_openrouter_20261110T223711599834.transcri
 | 3 | `https://openai.com/blog/gpt-5` (bổ sung URL) | `fetch(url="https://openai.com/blog/gpt-5")` | v4 | Đúng: route tới `fetch`. Trang trả 404 nên agent báo lỗi trung thực và đề nghị tìm bài khác, không bịa nội dung |
 | 4 | `Đăng bản tin này lên Telegram giúp mình` (yêu cầu gửi/đăng) | Không gọi tool (không gọi `send`) | v4 | Đúng ranh giới: agent hiển thị nội dung và hỏi "Bạn có muốn đăng không?" trước khi gửi. Lưu ý: hỏi bằng văn bản thường, không gọi `clarify` với `response_type=yes_no`; cùng nguyên nhân với R12 chưa pass ở mục B2 |
 
+Transcript bổ sung (v3, `gpt-4o-mini`): `starter_v0/transcripts/v3_openrouter_20261110T191021129813.transcript.json` (tin AI → `lookup`+`format`; đọc URL → `fetch`; yêu cầu đăng Telegram → hiện nội dung và hỏi xác nhận, không gọi `send`) và `starter_v0/transcripts/v3_openrouter_20261110T191135924190.transcript.json` (thiếu tài khoản → hỏi lại; bổ sung "Andrej Karpathy" → agent xin xác nhận thừa cả việc đọc tweet và đoán sai handle `andrejkarpathy`).
+
 Nhận xét: cả 3 loại hành vi cần chứng minh (yêu cầu thường, thiếu thông tin rồi bổ sung, xin xác nhận trước khi gửi) đều xuất hiện. Hạn chế: ở lượt 2 và 4 agent không dùng tool `clarify`; hành vi đúng nhưng không qua tool như thiết kế. Chưa gửi Telegram thật (chưa cấu hình `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID`), nên chưa có bằng chứng cho bonus gửi Telegram.
 
 ### B5a. Required Evidence — Tool mới, unit test, UI
@@ -130,51 +137,17 @@ Nhận xét: cả 3 loại hành vi cần chứng minh (yêu cầu thường, th
 |---|---|---|---|
 | Tool mới `research_deduplicate` | `starter_v0/tools/research_deduplicate/tool.py`, `TOOL.md` | Loại trùng URL chuẩn hóa, giữ thứ tự, không sửa đầu vào | Trả error dict khi `items` không phải list hoặc `url` không phải chuỗi |
 | Unit test tool mới | `starter_v0/tests/test_tools_todo.py` — `pytest`: 70 passed, 14 skipped, 0 failed | 3 test: happy path, input sai kiểu, URL không phải chuỗi | 14 skip còn lại là stub của tool có sẵn |
-| UI | `starter_v0/app.py` | Streamlit dùng chung vòng lặp tool với `chat.py` | **[TODO]** link dùng thử |
+| UI | `starter_v0/app.py`; lệnh chạy ở A1; `streamlit` trong `requirements.txt` | Streamlit dùng chung vòng lặp tool với `chat.py`; ghi transcript `*_ui_*`; chỉ liệt kê provider có API key | Lỗi tool luôn hiện cảnh báo (không che lỗi). **[TODO]** link dùng thử |
 
-Tool unit tests: 3 test cho tool mới; ví dụ lỗi unit test bắt được mà eval không bắt: `item["url"] = 123` phải trả `{"error": "TypeError"}` (đầu vào model không bao giờ gửi qua eval).
-
-
-Tool unit tests: số test đã viết, và một ví dụ lỗi mà unit test bắt được nhưng eval không bắt được.
+Tool unit tests: 3 test cho tool mới; ví dụ lỗi unit test bắt được mà eval không bắt: `item["url"] = 123` phải trả `{"error": "TypeError"}` (đầu vào model không bao giờ gửi qua eval). Tương tự, eval G05 chỉ kiểm tra model **gọi** `research_deduplicate`; nếu tool quên chuẩn hóa dấu `/` cuối thì eval vẫn PASS nhưng `test_my_new_tool_happy_path` FAIL (`unique_count` 4 thay vì 3).
 
 ### B5. Bonus Evidence
 
-Chỉ điền nếu nhóm làm bonus (ghi riêng, tối đa 10 điểm). Tool có sẵn (`send`, `policy`, `papers`, `paper_text`) không tự được bonus.
-
-| Bonus | Evidence File | What Worked | Risk / Guardrail |
-|---|---|---|---|
-| Small Local Model | xem B7 |  |  |
-| Hơn 3 tool mới (≥ 4) |  |  |  |
-| `send` gửi thật lên Telegram sau xác nhận | transcript |  |  |
-| Test challenge (0 skipped / regression test) | `pytest` output |  |  |
-
-Test challenge: số bug tìm được trong tool có sẵn (nếu có), cách sửa, và test regression tương ứng.
+Nhóm **không làm bonus**: không chạy model local (B7), chỉ có 1 tool mới, không gửi Telegram thật (không cấu hình `TELEGRAM_CHAT_ID` — nhờ vậy khi team khác dùng thử UI, `send` không thể gửi thật), 14 stub test của tool có sẵn vẫn skip.
 
 ### B7. Small Local Model Challenge (bonus)
 
-Chỉ điền nếu nhóm làm bonus này.
-
-| Version | Model (provider) | Prompt/Tools | case_accuracy | tool_routing | argument | multiturn | Run File |
-|---|---|---|---|---|---|---|---|
-| v3 | (cloud) | v3 |  |  |  |  |  |
-| v3-<model> | (ollama) | v3 |  |  |  |  |  |
-| v3-<model> | (ollama) | v3 |  |  |  |  |  |
-| v4-local |  |  |  |  |  |  |  |
-| v5-local |  |  |  |  |  |  |  |
-
-Lỗi đặc thù của model nhỏ (đếm từ run JSON):
-
-| Failure Pattern | Count | Example Case | Fix Tried | Helped? |
-|---|---|---|---|---|
-| wrong / hallucinated tool |  |  |  |  |
-| invalid JSON args (`_invalid_json_arguments`) |  |  |  |  |
-| no tool call / answered directly |  |  |  |  |
-| missed `clarify` |  |  |  |  |
-| repeated / unnecessary calls |  |  |  |  |
-
-- Cái gì giúp model nhỏ gọi tool đúng hơn nhất? Bằng chứng?
-- Bản prompt tối ưu cho local chạy trên model cloud thì sao?
-- Khi nào nhóm sẽ chọn model local thay vì cloud cho agent này?
+Không thực hiện.
 
 ## 5. Khó khăn và cách xử lý
 
@@ -183,6 +156,9 @@ Lỗi đặc thù của model nhỏ (đếm từ run JSON):
 - **Mô tả tool tự mâu thuẫn:** bản v2 vừa ghi "không dùng `clarify` để xin xác nhận" vừa ghi "dùng yes_no cho việc đó"; sửa ở v4.
 - **Kết quả không ổn định giữa các lần chạy** với cùng cấu hình (một case có thể pass rồi fail), nên chênh 0.05 chỉ là 1 case.
 - **v5 (rule xác nhận mạnh hơn trong prompt) làm kết quả xấu hơn** (base 0.85, group 0.80), nên hoàn lại prompt v1.
+- **UI báo `provider_error` dù model chạy đúng:** `chat.py` in log `🔧 tool(...)`; khi Streamlit chạy với stdout cp1252 (Windows) thì emoji gây `UnicodeEncodeError`. Sửa: `app.py` ép stdout UTF-8.
+- **OpenRouter 402 / hết credit:** tài khoản free tier ($0) không chạy được model trả phí lâu dài. UI để mặc định model miễn phí có tool calling (`nvidia/nemotron-3-ultra-550b-a55b:free`) cho người dùng thử; mọi eval vẫn chạy `gpt-4o-mini` để so sánh công bằng. Model free chậm hơn 2–4 lần (64–113 giây cho câu hỏi tin tức, so với ~26 giây của `gpt-4o-mini`) và đôi khi chạm `max_tool_rounds` (gọi `social_search`/`lookup` liên tục 4 lần mà không tổng hợp).
+- **Eval G05 phụ thuộc tool mới chưa merge:** tạm route tới `papers` để không làm đỏ `test_tool_contract.py`, đổi sang `research_deduplicate` sau khi tool được merge và chạy lại group v4.
 
 
 ## 6. Tổng hợp đóng góp
@@ -194,7 +170,9 @@ Chi tiết đóng góp của từng thành viên nằm trong [TEAM.md](../../TEA
 - **Fix thuộc `system_prompt.md`:** bỏ chỉ dẫn xấu của starter (đoán thay vì hỏi, gửi không cần xác nhận, ép một bước) — v1 tăng 0.70 → 0.80.
 - **Fix thuộc `tools.yaml`:** mô tả "dùng/không dùng", quy ước tham số, mapping tên → handle, ranh giới xác nhận — v2 và v4 tăng 0.80 → 0.90 → 0.95.
 - **Failure cần review thủ công:** R12 (base) và G08 (group). R12 kỳ vọng `response_type=yes_no` nhưng model hỏi "bạn muốn đăng nội dung nào?" bằng `text`, điều này hợp lý khi chưa có nội dung. G08 cho thấy agent hỏi thêm một lần dù người dùng đã xác nhận.
-- **Nếu có thêm một vòng:** chạy lặp R12 và G08 nhiều lần để đo độ dao động; sửa G05 để route tới `research_deduplicate`; thử làm rõ trong mô tả `send` khi nào câu trả lời của người dùng được coi là đã xác nhận.
+- **Prompt/tools không chuyển được sang model khác:** trên UI với model free `nvidia/nemotron-3-ultra-550b-a55b:free` (prompt/tools v3), câu hỏi chỉ là "Tin tức AI hôm nay có gì nổi bật?" nhưng model gọi `lookup` → `format` → **`send(confirmed=true)`** dù user không yêu cầu gửi (`starter_v0/transcripts/v3_openrouter_ui_20261110T192155318540.transcript.json`); tin không đi được chỉ vì thiếu `TELEGRAM_CHAT_ID`. Kết luận: cờ `confirmed` do **model** tự điền nên không phải guardrail thật; về lâu dài cần xác nhận phía ứng dụng (người dùng bấm nút) thay vì tin vào args.
+- **Còn lại trong `tools.yaml`:** description của `format`, `policy`, `papers`, `paper_text` vẫn là bản ngắn của starter, chưa có "khi nào dùng / không dùng".
+- **Nếu có thêm một vòng:** chạy lặp R12 và G08 nhiều lần để đo độ dao động; thử làm rõ trong mô tả `send` khi nào câu trả lời của người dùng được coi là đã xác nhận (để G08 PASS mà G07 không FAIL lại).
 
 
 ## 8. Tài liệu tham khảo

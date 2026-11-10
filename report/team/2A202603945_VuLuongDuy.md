@@ -23,7 +23,8 @@ Thành viên 3 — **Eval Designer, UI & Reporter** (CP4, CP5; rubric C5, C6, C7
   - Không dùng tool: G03 (câu cảm ơn), G04 (đặt vé — ngoài phạm vi).
   - Multi-turn: đổi nguồn Twitter → arXiv (G09), carry-over `topic=news` và đổi `timeframe` (G10).
   - G05 route tới tool mới `research_deduplicate` (2 URL chỉ khác hoa/thường và `/` cuối). Trước khi tool merge, G05 tạm trỏ tới `papers` để không làm đỏ `test_tool_contract.py`.
-  - Kết quả v3: **8/10 PASS**; 2 case fail (G04, G07) phát hiện lỗi thật mà base eval chưa phủ.
+  - Kết quả v3: **8/10 PASS**; 2 case fail (G04, G07) phát hiện lỗi thật mà base eval chưa phủ. G07 là lý do nhóm làm rõ boundary của `send` ở v4.
+  - Kết quả v4 (sau khi G05 trỏ tới tool mới): **9/10 PASS**, G05 PASS; G08 chuyển sang FAIL (đã xác nhận vẫn bị hỏi lại) — cặp G07/G08 đo được đánh đổi quá liều ↔ quá rụt rè.
 - **UI Streamlit `starter_v0/app.py`**: tái sử dụng `run_model_tool_loop` của `chat.py` để hành vi giống CLI; hiện tool call/kết quả/lỗi tool từng lượt (không che lỗi); ghi transcript `*_ui_*`; chỉ liệt kê provider có API key; model mặc định free có tool calling. Sửa lỗi `UnicodeEncodeError` (emoji log trên stdout cp1252 làm UI báo nhầm `provider_error`).
 - **Script `starter_v0/scripts/report_tables.py`**: sinh bảng B1–B4 từ `version_log.csv`, `runs/*.json`, `transcripts/*.json`; chỉ dùng run hợp lệ, đánh dấu run không hợp lệ.
 - **Live chat v3**: 2 phiên `chat.py` (7 lượt) gồm yêu cầu thường, thiếu thông tin rồi bổ sung, yêu cầu đăng Telegram.
@@ -34,7 +35,8 @@ Thành viên 3 — **Eval Designer, UI & Reporter** (CP4, CP5; rubric C5, C6, C7
 - File/commit/PR:
   - `b6953fd` — eval_group.json, app.py, report_tables.py, Phần A (merge vào `main` qua PR #1)
   - `d4ab035`, `ed65783`, `5017ac8`, `89e2e32`, `e2aae99` — sửa và hoàn thiện UI
-  - Run group: `starter_v0/runs/v3_B_group_openrouter_20261110T191010402195.json`
+  - Run group: `starter_v0/runs/v3_B_group_openrouter_20261110T191010402195.json` (v3), `starter_v0/runs/v4_B_group_openrouter_20261111T031818497981.json` (v4, bản chính thức trong B3)
+  - Transcript UI với model free tự gọi `send(confirmed=true)`: `starter_v0/transcripts/v3_openrouter_ui_20261110T192155318540.transcript.json`
   - Transcript: `starter_v0/transcripts/v3_openrouter_20261110T191021129813.transcript.json`, `starter_v0/transcripts/v3_openrouter_20261110T191135924190.transcript.json`
 - AI/công cụ đã dùng và cách tự kiểm tra kết quả:
   - Dùng **Claude Code** để phân tích đề, viết nháp eval case, code UI, script báo cáo.
