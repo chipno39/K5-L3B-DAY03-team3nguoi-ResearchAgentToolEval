@@ -68,18 +68,17 @@
       "id": "G05_route_new_tool",
       "phase": "B",
       "suite": "group",
-      "query": "Tìm giúp mình 3 paper arXiv mới nộp gần đây nhất về diffusion models.",
+      "query": "Mình gom được mấy kết quả này nhưng hình như có bài bị trùng, lọc trùng giúp mình: 1) 'GPT-5 ra mắt' https://openai.com/blog/gpt-5 ; 2) 'Claude mới' https://www.anthropic.com/news/claude ; 3) 'GPT-5 launch' https://OpenAI.com/blog/gpt-5/",
       "failure_type": "wrong_tool",
       "expect": {
         "tool_calls": [
-          {"name": "papers", "args": {"max_results": 3, "sort_by": "submittedDate"}}
+          {"name": "research_deduplicate", "args": {}}
         ]
       },
       "metadata": {
         "skill": "route_new_tool",
         "difficulty": "medium",
-        "placeholder": true,
-        "what_it_tests": "PLACEHOLDER — thay bằng case route tới tool mới của Thành viên 2 khi tool đã được đăng ký trong tools.yaml. Tạm thời: 'paper arXiv' phải route tới papers (không phải lookup), max_results=3, 'mới nộp' -> sort_by=submittedDate."
+        "what_it_tests": "Route tới tool mới research_deduplicate khi user ĐÃ có sẵn danh sách kết quả và muốn lọc trùng (URL 1 và 3 chỉ khác hoa/thường và dấu / cuối). Không được gọi lookup/fetch để tìm lại, không được tự lọc bằng text mà không gọi tool."
       }
     },
     {
