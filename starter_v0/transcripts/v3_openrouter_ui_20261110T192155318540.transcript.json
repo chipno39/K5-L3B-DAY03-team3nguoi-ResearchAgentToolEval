@@ -1,0 +1,429 @@
+{
+  "transcript_id": "v3_openrouter_ui_20261110T192155318540",
+  "version": "v3",
+  "artifact_version": "v3+p94ed41cdeb08+t9da193a925de",
+  "prompt_hash": "94ed41cdeb083be95d59dec094439a6ed4f7b02d3c1df33fc7ba1f4f21f1c630",
+  "tools_hash": "9da193a925defeba99d1b926040a4240dbd4de74412b9b7d07658f50488e4bae",
+  "provider": "openrouter",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "source": "streamlit_ui",
+  "system_prompt": "C:\\Users\\LENOVO\\K5-L3B-DAY03-team3nguoi-ResearchAgentToolEval\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\LENOVO\\K5-L3B-DAY03-team3nguoi-ResearchAgentToolEval\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "created_at": "2026-11-10T19:21:55",
+  "updated_at": "2026-11-10T19:23:42",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-10T19:22:06",
+      "user": "Tin tức AI hôm nay có gì nổi bật?",
+      "status": "answered",
+      "assistant_text": "**Tin tức AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- **The impossible standard we're setting for artificial intelligence** (The Jerusalem Post) – Thảo luận về sự chuyển dịch từ AI là trợ lý sang AI agent tự chủ, những rủi ro khi agent truy cập hệ thống tài chính, mạng doanh nghiệp và cơ sở hạ tầng quan trọng. [jpost.com](https://www.jpost.com/business-and-innovation/article-914414)\n\n- **The U.S.–China AI Competition: Two Paths to Artificial General Intelligence** (CSET) – So sánh hai cách tiếp cận AGI: Mỹ tập trung vào khả năng nhận thức cấp độ con người, Trung Quốc nhấn mạnh mở rộng trí tuệ vào hệ thống vật lý và xã hội. [cset.georgetown.edu](https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence)\n\n- **AI and your job: Threat or opportunity?** (FOX10) – AI đe dọa việc lặp lại (call center, data entry, copywriting junior) nhưng cũng tạo cơ hội ở xây dựng trung tâm dữ liệu, sản xuất chip và nâng cao năng suất lao động có kỹ năng cao. [fox10tv.com](https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity)\n\n- **Howard Professor nhận $700,000 NSF cho nghiên cứu AI tin cậy** (Howard University) – Dự án 3 năm phát triển neuro-symbolic AI để AI giải thích quyết định, hợp tác an toàn với con người trong giao thông, ứng cứu, an ninh quốc gia. [thedig.howard.edu](https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research)\n\n- **CrossnoKaye dùng Amazon Bedrock AgentCore cho AI vật lý** (AWS) – Kết hợp mô hình nhà máy và logic điều khiển để agent chẩn đoán nguyên nhân gốc rễ thiết bị thực tế. [aws.amazon.com](https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore)\n\n- **Công cụ AI quân sự giúp ngăn chặn đe dọa bom World Cup** (Federal News Network) – AI giảm thời gian phân tích từ 20 phút xuống 90 giây, hỗ trợ cảnh sát địa phương và liên bang. [federalnewsnetwork.com](https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat)\n\n- **Pennsylvania ban hành Luật Quảng cáo Đa dạng AI** (Inside Global Tech) – Quy định minh bạch cho nội dung AI-generated, đánh giá người dùng, gia hạn đăng ký tự động. [insideglobaltech.com](https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act)\n\n- **Úc sẽ bắt buộc báo cáo sau vụ hack OpenAI/Medicare** (The Guardian) – Thay đổi luật hình sự để công ty không thể khai không biết hệ thống bị xâm nhập. [theguardian.com](https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack)",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "AI artificial intelligence",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 10
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "AI artificial intelligence",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 10
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "AI artificial intelligence",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "The impossible standard we're setting for artificial intelligence | The Jerusalem Post",
+                    "url": "https://www.jpost.com/business-and-innovation/article-914414",
+                    "source": "jpost.com",
+                    "summary": "Artificial intelligence.\n\nArtificial intelligence. (credit: SHUTTERSTOCK)\n\nOthers fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate networks, sensitive information, and critical infrastructure. [...] Until recently, AI was largely an assistant; we asked it questions, evaluated its responses, and decided what to do with the information. Increasingly, we are asking AI to carry out the work directly.\n\nAn agent can be given an objective, determine the steps required, and execute them with limited human involvement. This transition has understandably generated anxiety as people worry about losing their jobs to systems that can perform tasks faster and more cheaply than they can. [...] Updated:\n\nFour years ago, most people had never held a conversation with an AI system. Today, millions routinely turn to ChatGPT, Claude, and Gemini for everything from writing software to making financial decisions.\n\nIn that short period, we have witnessed a remarkable technological transformation, and I believe the most consequential stage is only beginning. The emergence of autonomous AI agents represents a fundamental change in our relationship with machines.",
+                    "score": 0.5253938
+                  },
+                  {
+                    "title": "The U.S.–China AI Competition: Two Paths to Artificial General Intelligence | Center for Security and Emerging Technology",
+                    "url": "https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence",
+                    "source": "cset.georgetown.edu",
+                    "summary": "AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those tasks—artificial superintelligence (ASI). This outlook encourages investment in larger and more capable models, advanced reasoning, and agents that can carry out extended sequences of work. [...] Recent op-eds comparing the United States’ and China’s artificial intelligence (AI) programs fault the former for its focus on artificial general intelligence (AGI) while praising China for its success in applying AI throughout the whole… Read More\n\nReports #### Chinese Critiques of Large Language Models January 2025 [...] U.S. developers define AGI in terms of broadly human-level intellectual capabilities across a wide range of cognitive tasks. China’s discourse on “general AI” places greater weight on the extension of intelligent capabilities to physical and social systems.",
+                    "score": 0.46337196
+                  },
+                  {
+                    "title": "AI and your job: Threat or opportunity?",
+                    "url": "https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity",
+                    "source": "fox10tv.com",
+                    "summary": "MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.\n\nSome economists believe AI poses a particular threat to entry-level and repetitive work, including call center, data entry and junior copywriting jobs, according to The Wall Street Journal. Those tasks may be easier to automate. [...] Skip to content\n\nAdvertise With Us\n\n# AI and your job: Threat or opportunity?\n\nArtificial intelligence is changing the workplace. Learn how it could affect jobs and where to find AI training in Alabama.\n\nBy Lenise Ligon\n\nPublished: Nov. 9, 2026 at 9:58 PM CST|Updated: seconds ago\n\nAdd Us On GoogleAdd as a preferred source on Google [...] But AI could also create opportunities. A Bloomberg article points to potential job growth in construction and manufacturing as companies build data centers and produce the chips that power the technology. Some higher-skilled office workers could also benefit if AI helps them become more productive.",
+                    "score": 0.41976747
+                  },
+                  {
+                    "title": "Howard Professor Danda B. Rawat Receives $700,000 NSF Award for AI Research | The Dig at Howard University",
+                    "url": "https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research",
+                    "source": "thedig.howard.edu",
+                    "summary": "Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results without clearly explaining how decisions are made. The three-year project, led by Rawat, will develop innovative technologies for artificial general intelligence (AGI) capabilities. Rawat also serves as associate dean of [...] Danda B. Rawat, Ph.D., a professor of computer science in Howard University’s College of Engineering and Architecture, and the director of the AI Center of Excellence (AICoE), has received a $700,000 award from the National Science Foundation (NSF) to conduct research focused on one of the most pressing challenges in artificial intelligence: how to build AI systems that people can trust. [...] “As AI advances towards AGI and becomes increasingly integral to our lives, workplaces, and national defense, developing AI systems that people can trust, whether as teammates, leaders, or assistants, is more important than ever. We will leverage neuro-symbolic AI for advanced scene understanding in critical applications, enabling AI to reason, adapt, and collaborate safely and effectively with humans,” Rawat said.",
+                    "score": 0.33875546
+                  },
+                  {
+                    "title": "How CrossnoKaye grounds physical AI with Amazon Bedrock AgentCore | Artificial Intelligence",
+                    "url": "https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore",
+                    "source": "aws.amazon.com",
+                    "summary": "a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before adding AI: An agent can only diagnose real physical root causes, like distinguishing a slipping downstream recirculating belt from a secondary crusher fault, when it can read the process topology, the deployed base control narratives and interlocks, the setting change history, and the optimizer state in one consistent model rather than stitching together six disconnected plant systems.",
+                    "score": 0.33280948
+                  },
+                  {
+                    "title": "Military-made AI tool helped thwart World Cup bomb threat - Federal News Network",
+                    "url": "https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat",
+                    "source": "federalnewsnetwork.com",
+                    "summary": "A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.\n\nThe previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, Army Capt. Ryan Hetrick, who leads the Pentagon’s Generative AI Task Force, said Nov. 6 at an AI event in Washington. [...] Hetrick has become one of the military’s biggest — and busiest — evangelists for AI. The GenAI Task Force travels around the globe to sit down with troops on operations floors and in the field and find AI fixes for their most pressing problems. [...] Join us Dec. 7 at 1 pm for Federal News Network's Industry Exchange IT Modernization event. Top technology leaders will explore the latest IT modernization strategies and share actionable insights to help agencies optimize infrastructure, strengthen security and improve mission outcomes.\n\nThat process typically takes about 20 minutes, he said. The AI agent can get it done in 90 seconds — giving local and federal authorities more time to tackle the problem instead.",
+                    "score": 0.2451532
+                  },
+                  {
+                    "title": "Pennsylvania Enacts Artificial Intelligence Deceptive Advertising Act | Inside Global Tech",
+                    "url": "https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act",
+                    "source": "insideglobaltech.com",
+                    "summary": "consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic regulatory environment, including in connection with digital and online advertising, social media, AI-powered and agentic services, connected devices, and robotics. [...] Jayne counsels clients across industries to launch and enhance products, services, and governance programs involving their collection and use of data and emerging technologies. Her experience spans U.S. comprehensive privacy, automated decisionmaking, AI governance, biometric privacy, surveillance and algorithmic pricing, and AI transparency, disclosure, and safety frameworks. She partners with clients to design products and governance programs that keep pace with the dynamic regulatory",
+                    "score": 0.19650257
+                  },
+                  {
+                    "title": "Australia to introduce mandatory reporting after OpenAI hack to combat artificial intelligence ‘going rogue’",
+                    "url": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack",
+                    "source": "theguardian.com",
+                    "summary": "Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded'",
+                    "score": 0.19337612
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "format",
+              "args": {
+                "headline": "Tin tức AI nổi bật hôm nay (10/11/2026)",
+                "items": [
+                  {
+                    "title": "The impossible standard we're setting for artificial intelligence | The Jerusalem Post",
+                    "url": "https://www.jpost.com/business-and-innovation/article-914414",
+                    "source": "jpost.com",
+                    "summary": "Artificial intelligence.\n\nArtificial intelligence. (credit: SHUTTERSTOCK)\n\nOthers fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate networks, sensitive information, and critical infrastructure. [...] Until recently, AI was largely an assistant; we asked it questions, evaluated its responses, and decided what to do with the information. Increasingly, we are asking AI to carry out the work directly.\n\nAn agent can be given an objective, determine the steps required, and execute them with limited human involvement. This transition has understandably generated anxiety as people worry about losing their jobs to systems that can perform tasks faster and more cheaply than they can. [...] Updated:\n\nFour years ago, most people had never held a conversation with an AI system. Today, millions routinely turn to ChatGPT, Claude, and Gemini for everything from writing software to making financial decisions.\n\nIn that short period, we have witnessed a remarkable technological transformation, and I believe the most consequential stage is only beginning. The emergence of autonomous AI agents represents a fundamental change in our relationship with machines."
+                  },
+                  {
+                    "title": "The U.S.–China AI Competition: Two Paths to Artificial General Intelligence | Center for Security and Emerging Technology",
+                    "url": "https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence",
+                    "source": "cset.georgetown.edu",
+                    "summary": "AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those tasks—artificial superintelligence (ASI). This outlook encourages investment in larger and more capable models, advanced reasoning, and agents that can carry out extended sequences of work. [...] Recent op-eds comparing the United States’ and China’s artificial intelligence (AI) programs fault the former for its focus on artificial general intelligence (AGI) while praising China for its success in applying AI throughout the whole… Read More\n\nReports #### Chinese Critiques of Large Language Models January 2025 [...] U.S. developers define AGI in terms of broadly human-level intellectual capabilities across a wide range of cognitive tasks. China’s discourse on “general AI” places greater weight on the extension of intelligent capabilities to physical and social systems."
+                  },
+                  {
+                    "title": "AI and your job: Threat or opportunity?",
+                    "url": "https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity",
+                    "source": "fox10tv.com",
+                    "summary": "MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.\n\nSome economists believe AI poses a particular threat to entry-level and repetitive work, including call center, data entry and junior copywriting jobs, according to The Wall Street Journal. Those tasks may be easier to automate. [...] Skip to content\n\nAdvertise With Us\n\n# AI and your job: Threat or opportunity?\n\nArtificial intelligence is changing the workplace. Learn how it could affect jobs and where to find AI training in Alabama.\n\nBy Lenise Ligon\n\nPublished: Nov. 9, 2026 at 9:58 PM CST|Updated: seconds ago\n\nAdd Us On GoogleAdd as a preferred source on Google [...] But AI could also create opportunities. A Bloomberg article points to potential job growth in construction and manufacturing as companies build data centers and produce the chips that power the technology. Some higher-skilled office workers could also benefit if AI helps them become more productive."
+                  },
+                  {
+                    "title": "Howard Professor Danda B. Rawat Receives $700,000 NSF Award for AI Research | The Dig at Howard University",
+                    "url": "https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research",
+                    "source": "thedig.howard.edu",
+                    "summary": "Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results without clearly explaining how decisions are made. The three-year project, led by Rawat, will develop innovative technologies for artificial general intelligence (AGI) capabilities. Rawat also serves as associate dean of [...] Danda B. Rawat, Ph.D., a professor of computer science in Howard University’s College of Engineering and Architecture, and the director of the AI Center of Excellence (AICoE), has received a $700,000 award from the National Science Foundation (NSF) to conduct research focused on one of the most pressing challenges in artificial intelligence: how to build AI systems that people can trust. [...] “As AI advances towards AGI and becomes increasingly integral to our lives, workplaces, and national defense, developing AI systems that people can trust, whether as teammates, leaders, or assistants, is more important than ever. We will leverage neuro-symbolic AI for advanced scene understanding in critical applications, enabling AI to reason, adapt, and collaborate safely and effectively with humans,” Rawat said."
+                  },
+                  {
+                    "title": "How CrossnoKaye grounds physical AI with Amazon Bedrock AgentCore | Artificial Intelligence",
+                    "url": "https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore",
+                    "source": "aws.amazon.com",
+                    "summary": "a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before adding AI: An agent can only diagnose real physical root causes, like distinguishing a slipping downstream recirculating belt from a secondary crusher fault, when it can read the process topology, the deployed base control narratives and interlocks, the setting change history, and the optimizer state in one consistent model rather than stitching together six disconnected plant systems."
+                  },
+                  {
+                    "title": "Military-made AI tool helped thwart World Cup bomb threat - Federal News Network",
+                    "url": "https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat",
+                    "source": "federalnewsnetwork.com",
+                    "summary": "A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.\n\nThe previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, Army Capt. Ryan Hetrick, who leads the Pentagon’s Generative AI Task Force, said Nov. 6 at an AI event in Washington. [...] Hetrick has become one of the military’s biggest — and busiest — evangelists for AI. The GenAI Task Force travels around the globe to sit down with troops on operations floors and in the field and find AI fixes for their most pressing problems. [...] Join us Dec. 7 at 1 pm for Federal News Network's Industry Exchange IT Modernization event. Top technology leaders will explore the latest IT modernization strategies and share actionable insights to help agencies optimize infrastructure, strengthen security and improve mission outcomes.\n\nThat process typically takes about 20 minutes, he said. The AI agent can get it done in 90 seconds — giving local and federal authorities more time to tackle the problem instead."
+                  },
+                  {
+                    "title": "Pennsylvania Enacts Artificial Intelligence Deceptive Advertising Act | Inside Global Tech",
+                    "url": "https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act",
+                    "source": "insideglobaltech.com",
+                    "summary": "consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic regulatory environment, including in connection with digital and online advertising, social media, AI-powered and agentic services, connected devices, and robotics. [...] Jayne counsels clients across industries to launch and enhance products, services, and governance programs involving their collection and use of data and emerging technologies. Her experience spans U.S. comprehensive privacy, automated decisionmaking, AI governance, biometric privacy, surveillance and algorithmic pricing, and AI transparency, disclosure, and safety frameworks. She partners with clients to design products and governance programs that keep pace with the dynamic regulatory"
+                  },
+                  {
+                    "title": "Australia to introduce mandatory reporting after OpenAI hack to combat artificial intelligence ‘going rogue’",
+                    "url": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack",
+                    "source": "theguardian.com",
+                    "summary": "Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded'"
+                  }
+                ],
+                "template": "daily_ai_vn"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "format",
+              "args": {
+                "headline": "Tin tức AI nổi bật hôm nay (10/11/2026)",
+                "items": [
+                  {
+                    "title": "The impossible standard we're setting for artificial intelligence | The Jerusalem Post",
+                    "url": "https://www.jpost.com/business-and-innovation/article-914414",
+                    "source": "jpost.com",
+                    "summary": "Artificial intelligence.\n\nArtificial intelligence. (credit: SHUTTERSTOCK)\n\nOthers fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate networks, sensitive information, and critical infrastructure. [...] Until recently, AI was largely an assistant; we asked it questions, evaluated its responses, and decided what to do with the information. Increasingly, we are asking AI to carry out the work directly.\n\nAn agent can be given an objective, determine the steps required, and execute them with limited human involvement. This transition has understandably generated anxiety as people worry about losing their jobs to systems that can perform tasks faster and more cheaply than they can. [...] Updated:\n\nFour years ago, most people had never held a conversation with an AI system. Today, millions routinely turn to ChatGPT, Claude, and Gemini for everything from writing software to making financial decisions.\n\nIn that short period, we have witnessed a remarkable technological transformation, and I believe the most consequential stage is only beginning. The emergence of autonomous AI agents represents a fundamental change in our relationship with machines."
+                  },
+                  {
+                    "title": "The U.S.–China AI Competition: Two Paths to Artificial General Intelligence | Center for Security and Emerging Technology",
+                    "url": "https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence",
+                    "source": "cset.georgetown.edu",
+                    "summary": "AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those tasks—artificial superintelligence (ASI). This outlook encourages investment in larger and more capable models, advanced reasoning, and agents that can carry out extended sequences of work. [...] Recent op-eds comparing the United States’ and China’s artificial intelligence (AI) programs fault the former for its focus on artificial general intelligence (AGI) while praising China for its success in applying AI throughout the whole… Read More\n\nReports #### Chinese Critiques of Large Language Models January 2025 [...] U.S. developers define AGI in terms of broadly human-level intellectual capabilities across a wide range of cognitive tasks. China’s discourse on “general AI” places greater weight on the extension of intelligent capabilities to physical and social systems."
+                  },
+                  {
+                    "title": "AI and your job: Threat or opportunity?",
+                    "url": "https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity",
+                    "source": "fox10tv.com",
+                    "summary": "MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.\n\nSome economists believe AI poses a particular threat to entry-level and repetitive work, including call center, data entry and junior copywriting jobs, according to The Wall Street Journal. Those tasks may be easier to automate. [...] Skip to content\n\nAdvertise With Us\n\n# AI and your job: Threat or opportunity?\n\nArtificial intelligence is changing the workplace. Learn how it could affect jobs and where to find AI training in Alabama.\n\nBy Lenise Ligon\n\nPublished: Nov. 9, 2026 at 9:58 PM CST|Updated: seconds ago\n\nAdd Us On GoogleAdd as a preferred source on Google [...] But AI could also create opportunities. A Bloomberg article points to potential job growth in construction and manufacturing as companies build data centers and produce the chips that power the technology. Some higher-skilled office workers could also benefit if AI helps them become more productive."
+                  },
+                  {
+                    "title": "Howard Professor Danda B. Rawat Receives $700,000 NSF Award for AI Research | The Dig at Howard University",
+                    "url": "https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research",
+                    "source": "thedig.howard.edu",
+                    "summary": "Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results without clearly explaining how decisions are made. The three-year project, led by Rawat, will develop innovative technologies for artificial general intelligence (AGI) capabilities. Rawat also serves as associate dean of [...] Danda B. Rawat, Ph.D., a professor of computer science in Howard University’s College of Engineering and Architecture, and the director of the AI Center of Excellence (AICoE), has received a $700,000 award from the National Science Foundation (NSF) to conduct research focused on one of the most pressing challenges in artificial intelligence: how to build AI systems that people can trust. [...] “As AI advances towards AGI and becomes increasingly integral to our lives, workplaces, and national defense, developing AI systems that people can trust, whether as teammates, leaders, or assistants, is more important than ever. We will leverage neuro-symbolic AI for advanced scene understanding in critical applications, enabling AI to reason, adapt, and collaborate safely and effectively with humans,” Rawat said."
+                  },
+                  {
+                    "title": "How CrossnoKaye grounds physical AI with Amazon Bedrock AgentCore | Artificial Intelligence",
+                    "url": "https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore",
+                    "source": "aws.amazon.com",
+                    "summary": "a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before adding AI: An agent can only diagnose real physical root causes, like distinguishing a slipping downstream recirculating belt from a secondary crusher fault, when it can read the process topology, the deployed base control narratives and interlocks, the setting change history, and the optimizer state in one consistent model rather than stitching together six disconnected plant systems."
+                  },
+                  {
+                    "title": "Military-made AI tool helped thwart World Cup bomb threat - Federal News Network",
+                    "url": "https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat",
+                    "source": "federalnewsnetwork.com",
+                    "summary": "A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.\n\nThe previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, Army Capt. Ryan Hetrick, who leads the Pentagon’s Generative AI Task Force, said Nov. 6 at an AI event in Washington. [...] Hetrick has become one of the military’s biggest — and busiest — evangelists for AI. The GenAI Task Force travels around the globe to sit down with troops on operations floors and in the field and find AI fixes for their most pressing problems. [...] Join us Dec. 7 at 1 pm for Federal News Network's Industry Exchange IT Modernization event. Top technology leaders will explore the latest IT modernization strategies and share actionable insights to help agencies optimize infrastructure, strengthen security and improve mission outcomes.\n\nThat process typically takes about 20 minutes, he said. The AI agent can get it done in 90 seconds — giving local and federal authorities more time to tackle the problem instead."
+                  },
+                  {
+                    "title": "Pennsylvania Enacts Artificial Intelligence Deceptive Advertising Act | Inside Global Tech",
+                    "url": "https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act",
+                    "source": "insideglobaltech.com",
+                    "summary": "consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic regulatory environment, including in connection with digital and online advertising, social media, AI-powered and agentic services, connected devices, and robotics. [...] Jayne counsels clients across industries to launch and enhance products, services, and governance programs involving their collection and use of data and emerging technologies. Her experience spans U.S. comprehensive privacy, automated decisionmaking, AI governance, biometric privacy, surveillance and algorithmic pricing, and AI transparency, disclosure, and safety frameworks. She partners with clients to design products and governance programs that keep pace with the dynamic regulatory"
+                  },
+                  {
+                    "title": "Australia to introduce mandatory reporting after OpenAI hack to combat artificial intelligence ‘going rogue’",
+                    "url": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack",
+                    "source": "theguardian.com",
+                    "summary": "Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded'"
+                  }
+                ],
+                "template": "daily_ai_vn"
+              },
+              "result": {
+                "tool": "render_digest",
+                "template": "daily_ai_vn",
+                "markdown": "**Tin tức AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- Artificial intelligence.  Artificial intelligence. (credit: SHUTTERSTOCK)  Others fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate ... - [jpost.com](https://www.jpost.com/business-and-innovation/article-914414)\n- AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those ... - [cset.georgetown.edu](https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence)\n- MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.  Some economists believe AI poses a particular threat to entry-level and repetitive work, including call... - [fox10tv.com](https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity)\n- Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results wit... - [thedig.howard.edu](https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research)\n- a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before a... - [aws.amazon.com](https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore)\n- A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.  The previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, A... - [federalnewsnetwork.com](https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat)\n- consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic re... - [insideglobaltech.com](https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act)\n- Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded' - [theguardian.com](https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack)\n",
+                "item_count": 8
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "send",
+              "args": {
+                "text": "**Tin tức AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- Artificial intelligence.  Artificial intelligence. (credit: SHUTTERSTOCK)  Others fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate ... - [jpost.com](https://www.jpost.com/business-and-innovation/article-914414)\n- AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those ... - [cset.georgetown.edu](https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence)\n- MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.  Some economists believe AI poses a particular threat to entry-level and repetitive work, including call... - [fox10tv.com](https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity)\n- Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results wit... - [thedig.howard.edu](https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research)\n- a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before a... - [aws.amazon.com](https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore)\n- A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.  The previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, A... - [federalnewsnetwork.com](https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat)\n- consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic re... - [insideglobaltech.com](https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act)\n- Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded' - [theguardian.com](https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack)",
+                "confirmed": true
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "send",
+              "args": {
+                "text": "**Tin tức AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- Artificial intelligence.  Artificial intelligence. (credit: SHUTTERSTOCK)  Others fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate ... - [jpost.com](https://www.jpost.com/business-and-innovation/article-914414)\n- AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those ... - [cset.georgetown.edu](https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence)\n- MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.  Some economists believe AI poses a particular threat to entry-level and repetitive work, including call... - [fox10tv.com](https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity)\n- Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results wit... - [thedig.howard.edu](https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research)\n- a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before a... - [aws.amazon.com](https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore)\n- A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.  The previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, A... - [federalnewsnetwork.com](https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat)\n- consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic re... - [insideglobaltech.com](https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act)\n- Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded' - [theguardian.com](https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack)",
+                "confirmed": true
+              },
+              "result": {
+                "tool": "send_telegram",
+                "error": "RuntimeError",
+                "message": "Missing TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env var"
+              }
+            }
+          ]
+        },
+        {
+          "round": 4,
+          "assistant_text": "**Tin tức AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- **The impossible standard we're setting for artificial intelligence** (The Jerusalem Post) – Thảo luận về sự chuyển dịch từ AI là trợ lý sang AI agent tự chủ, những rủi ro khi agent truy cập hệ thống tài chính, mạng doanh nghiệp và cơ sở hạ tầng quan trọng. [jpost.com](https://www.jpost.com/business-and-innovation/article-914414)\n\n- **The U.S.–China AI Competition: Two Paths to Artificial General Intelligence** (CSET) – So sánh hai cách tiếp cận AGI: Mỹ tập trung vào khả năng nhận thức cấp độ con người, Trung Quốc nhấn mạnh mở rộng trí tuệ vào hệ thống vật lý và xã hội. [cset.georgetown.edu](https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence)\n\n- **AI and your job: Threat or opportunity?** (FOX10) – AI đe dọa việc lặp lại (call center, data entry, copywriting junior) nhưng cũng tạo cơ hội ở xây dựng trung tâm dữ liệu, sản xuất chip và nâng cao năng suất lao động có kỹ năng cao. [fox10tv.com](https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity)\n\n- **Howard Professor nhận $700,000 NSF cho nghiên cứu AI tin cậy** (Howard University) – Dự án 3 năm phát triển neuro-symbolic AI để AI giải thích quyết định, hợp tác an toàn với con người trong giao thông, ứng cứu, an ninh quốc gia. [thedig.howard.edu](https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research)\n\n- **CrossnoKaye dùng Amazon Bedrock AgentCore cho AI vật lý** (AWS) – Kết hợp mô hình nhà máy và logic điều khiển để agent chẩn đoán nguyên nhân gốc rễ thiết bị thực tế. [aws.amazon.com](https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore)\n\n- **Công cụ AI quân sự giúp ngăn chặn đe dọa bom World Cup** (Federal News Network) – AI giảm thời gian phân tích từ 20 phút xuống 90 giây, hỗ trợ cảnh sát địa phương và liên bang. [federalnewsnetwork.com](https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat)\n\n- **Pennsylvania ban hành Luật Quảng cáo Đa dạng AI** (Inside Global Tech) – Quy định minh bạch cho nội dung AI-generated, đánh giá người dùng, gia hạn đăng ký tự động. [insideglobaltech.com](https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act)\n\n- **Úc sẽ bắt buộc báo cáo sau vụ hack OpenAI/Medicare** (The Guardian) – Thay đổi luật hình sự để công ty không thể khai không biết hệ thống bị xâm nhập. [theguardian.com](https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack)",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI artificial intelligence",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 10
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI artificial intelligence",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "The impossible standard we're setting for artificial intelligence | The Jerusalem Post",
+                "url": "https://www.jpost.com/business-and-innovation/article-914414",
+                "source": "jpost.com",
+                "summary": "Artificial intelligence.\n\nArtificial intelligence. (credit: SHUTTERSTOCK)\n\nOthers fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate networks, sensitive information, and critical infrastructure. [...] Until recently, AI was largely an assistant; we asked it questions, evaluated its responses, and decided what to do with the information. Increasingly, we are asking AI to carry out the work directly.\n\nAn agent can be given an objective, determine the steps required, and execute them with limited human involvement. This transition has understandably generated anxiety as people worry about losing their jobs to systems that can perform tasks faster and more cheaply than they can. [...] Updated:\n\nFour years ago, most people had never held a conversation with an AI system. Today, millions routinely turn to ChatGPT, Claude, and Gemini for everything from writing software to making financial decisions.\n\nIn that short period, we have witnessed a remarkable technological transformation, and I believe the most consequential stage is only beginning. The emergence of autonomous AI agents represents a fundamental change in our relationship with machines.",
+                "score": 0.5253938
+              },
+              {
+                "title": "The U.S.–China AI Competition: Two Paths to Artificial General Intelligence | Center for Security and Emerging Technology",
+                "url": "https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence",
+                "source": "cset.georgetown.edu",
+                "summary": "AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those tasks—artificial superintelligence (ASI). This outlook encourages investment in larger and more capable models, advanced reasoning, and agents that can carry out extended sequences of work. [...] Recent op-eds comparing the United States’ and China’s artificial intelligence (AI) programs fault the former for its focus on artificial general intelligence (AGI) while praising China for its success in applying AI throughout the whole… Read More\n\nReports #### Chinese Critiques of Large Language Models January 2025 [...] U.S. developers define AGI in terms of broadly human-level intellectual capabilities across a wide range of cognitive tasks. China’s discourse on “general AI” places greater weight on the extension of intelligent capabilities to physical and social systems.",
+                "score": 0.46337196
+              },
+              {
+                "title": "AI and your job: Threat or opportunity?",
+                "url": "https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity",
+                "source": "fox10tv.com",
+                "summary": "MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.\n\nSome economists believe AI poses a particular threat to entry-level and repetitive work, including call center, data entry and junior copywriting jobs, according to The Wall Street Journal. Those tasks may be easier to automate. [...] Skip to content\n\nAdvertise With Us\n\n# AI and your job: Threat or opportunity?\n\nArtificial intelligence is changing the workplace. Learn how it could affect jobs and where to find AI training in Alabama.\n\nBy Lenise Ligon\n\nPublished: Nov. 9, 2026 at 9:58 PM CST|Updated: seconds ago\n\nAdd Us On GoogleAdd as a preferred source on Google [...] But AI could also create opportunities. A Bloomberg article points to potential job growth in construction and manufacturing as companies build data centers and produce the chips that power the technology. Some higher-skilled office workers could also benefit if AI helps them become more productive.",
+                "score": 0.41976747
+              },
+              {
+                "title": "Howard Professor Danda B. Rawat Receives $700,000 NSF Award for AI Research | The Dig at Howard University",
+                "url": "https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research",
+                "source": "thedig.howard.edu",
+                "summary": "Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results without clearly explaining how decisions are made. The three-year project, led by Rawat, will develop innovative technologies for artificial general intelligence (AGI) capabilities. Rawat also serves as associate dean of [...] Danda B. Rawat, Ph.D., a professor of computer science in Howard University’s College of Engineering and Architecture, and the director of the AI Center of Excellence (AICoE), has received a $700,000 award from the National Science Foundation (NSF) to conduct research focused on one of the most pressing challenges in artificial intelligence: how to build AI systems that people can trust. [...] “As AI advances towards AGI and becomes increasingly integral to our lives, workplaces, and national defense, developing AI systems that people can trust, whether as teammates, leaders, or assistants, is more important than ever. We will leverage neuro-symbolic AI for advanced scene understanding in critical applications, enabling AI to reason, adapt, and collaborate safely and effectively with humans,” Rawat said.",
+                "score": 0.33875546
+              },
+              {
+                "title": "How CrossnoKaye grounds physical AI with Amazon Bedrock AgentCore | Artificial Intelligence",
+                "url": "https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore",
+                "source": "aws.amazon.com",
+                "summary": "a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before adding AI: An agent can only diagnose real physical root causes, like distinguishing a slipping downstream recirculating belt from a secondary crusher fault, when it can read the process topology, the deployed base control narratives and interlocks, the setting change history, and the optimizer state in one consistent model rather than stitching together six disconnected plant systems.",
+                "score": 0.33280948
+              },
+              {
+                "title": "Military-made AI tool helped thwart World Cup bomb threat - Federal News Network",
+                "url": "https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat",
+                "source": "federalnewsnetwork.com",
+                "summary": "A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.\n\nThe previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, Army Capt. Ryan Hetrick, who leads the Pentagon’s Generative AI Task Force, said Nov. 6 at an AI event in Washington. [...] Hetrick has become one of the military’s biggest — and busiest — evangelists for AI. The GenAI Task Force travels around the globe to sit down with troops on operations floors and in the field and find AI fixes for their most pressing problems. [...] Join us Dec. 7 at 1 pm for Federal News Network's Industry Exchange IT Modernization event. Top technology leaders will explore the latest IT modernization strategies and share actionable insights to help agencies optimize infrastructure, strengthen security and improve mission outcomes.\n\nThat process typically takes about 20 minutes, he said. The AI agent can get it done in 90 seconds — giving local and federal authorities more time to tackle the problem instead.",
+                "score": 0.2451532
+              },
+              {
+                "title": "Pennsylvania Enacts Artificial Intelligence Deceptive Advertising Act | Inside Global Tech",
+                "url": "https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act",
+                "source": "insideglobaltech.com",
+                "summary": "consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic regulatory environment, including in connection with digital and online advertising, social media, AI-powered and agentic services, connected devices, and robotics. [...] Jayne counsels clients across industries to launch and enhance products, services, and governance programs involving their collection and use of data and emerging technologies. Her experience spans U.S. comprehensive privacy, automated decisionmaking, AI governance, biometric privacy, surveillance and algorithmic pricing, and AI transparency, disclosure, and safety frameworks. She partners with clients to design products and governance programs that keep pace with the dynamic regulatory",
+                "score": 0.19650257
+              },
+              {
+                "title": "Australia to introduce mandatory reporting after OpenAI hack to combat artificial intelligence ‘going rogue’",
+                "url": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack",
+                "source": "theguardian.com",
+                "summary": "Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded'",
+                "score": 0.19337612
+              }
+            ]
+          }
+        },
+        {
+          "tool": "format",
+          "args": {
+            "headline": "Tin tức AI nổi bật hôm nay (10/11/2026)",
+            "items": [
+              {
+                "title": "The impossible standard we're setting for artificial intelligence | The Jerusalem Post",
+                "url": "https://www.jpost.com/business-and-innovation/article-914414",
+                "source": "jpost.com",
+                "summary": "Artificial intelligence.\n\nArtificial intelligence. (credit: SHUTTERSTOCK)\n\nOthers fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate networks, sensitive information, and critical infrastructure. [...] Until recently, AI was largely an assistant; we asked it questions, evaluated its responses, and decided what to do with the information. Increasingly, we are asking AI to carry out the work directly.\n\nAn agent can be given an objective, determine the steps required, and execute them with limited human involvement. This transition has understandably generated anxiety as people worry about losing their jobs to systems that can perform tasks faster and more cheaply than they can. [...] Updated:\n\nFour years ago, most people had never held a conversation with an AI system. Today, millions routinely turn to ChatGPT, Claude, and Gemini for everything from writing software to making financial decisions.\n\nIn that short period, we have witnessed a remarkable technological transformation, and I believe the most consequential stage is only beginning. The emergence of autonomous AI agents represents a fundamental change in our relationship with machines."
+              },
+              {
+                "title": "The U.S.–China AI Competition: Two Paths to Artificial General Intelligence | Center for Security and Emerging Technology",
+                "url": "https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence",
+                "source": "cset.georgetown.edu",
+                "summary": "AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those tasks—artificial superintelligence (ASI). This outlook encourages investment in larger and more capable models, advanced reasoning, and agents that can carry out extended sequences of work. [...] Recent op-eds comparing the United States’ and China’s artificial intelligence (AI) programs fault the former for its focus on artificial general intelligence (AGI) while praising China for its success in applying AI throughout the whole… Read More\n\nReports #### Chinese Critiques of Large Language Models January 2025 [...] U.S. developers define AGI in terms of broadly human-level intellectual capabilities across a wide range of cognitive tasks. China’s discourse on “general AI” places greater weight on the extension of intelligent capabilities to physical and social systems."
+              },
+              {
+                "title": "AI and your job: Threat or opportunity?",
+                "url": "https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity",
+                "source": "fox10tv.com",
+                "summary": "MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.\n\nSome economists believe AI poses a particular threat to entry-level and repetitive work, including call center, data entry and junior copywriting jobs, according to The Wall Street Journal. Those tasks may be easier to automate. [...] Skip to content\n\nAdvertise With Us\n\n# AI and your job: Threat or opportunity?\n\nArtificial intelligence is changing the workplace. Learn how it could affect jobs and where to find AI training in Alabama.\n\nBy Lenise Ligon\n\nPublished: Nov. 9, 2026 at 9:58 PM CST|Updated: seconds ago\n\nAdd Us On GoogleAdd as a preferred source on Google [...] But AI could also create opportunities. A Bloomberg article points to potential job growth in construction and manufacturing as companies build data centers and produce the chips that power the technology. Some higher-skilled office workers could also benefit if AI helps them become more productive."
+              },
+              {
+                "title": "Howard Professor Danda B. Rawat Receives $700,000 NSF Award for AI Research | The Dig at Howard University",
+                "url": "https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research",
+                "source": "thedig.howard.edu",
+                "summary": "Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results without clearly explaining how decisions are made. The three-year project, led by Rawat, will develop innovative technologies for artificial general intelligence (AGI) capabilities. Rawat also serves as associate dean of [...] Danda B. Rawat, Ph.D., a professor of computer science in Howard University’s College of Engineering and Architecture, and the director of the AI Center of Excellence (AICoE), has received a $700,000 award from the National Science Foundation (NSF) to conduct research focused on one of the most pressing challenges in artificial intelligence: how to build AI systems that people can trust. [...] “As AI advances towards AGI and becomes increasingly integral to our lives, workplaces, and national defense, developing AI systems that people can trust, whether as teammates, leaders, or assistants, is more important than ever. We will leverage neuro-symbolic AI for advanced scene understanding in critical applications, enabling AI to reason, adapt, and collaborate safely and effectively with humans,” Rawat said."
+              },
+              {
+                "title": "How CrossnoKaye grounds physical AI with Amazon Bedrock AgentCore | Artificial Intelligence",
+                "url": "https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore",
+                "source": "aws.amazon.com",
+                "summary": "a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before adding AI: An agent can only diagnose real physical root causes, like distinguishing a slipping downstream recirculating belt from a secondary crusher fault, when it can read the process topology, the deployed base control narratives and interlocks, the setting change history, and the optimizer state in one consistent model rather than stitching together six disconnected plant systems."
+              },
+              {
+                "title": "Military-made AI tool helped thwart World Cup bomb threat - Federal News Network",
+                "url": "https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat",
+                "source": "federalnewsnetwork.com",
+                "summary": "A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.\n\nThe previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, Army Capt. Ryan Hetrick, who leads the Pentagon’s Generative AI Task Force, said Nov. 6 at an AI event in Washington. [...] Hetrick has become one of the military’s biggest — and busiest — evangelists for AI. The GenAI Task Force travels around the globe to sit down with troops on operations floors and in the field and find AI fixes for their most pressing problems. [...] Join us Dec. 7 at 1 pm for Federal News Network's Industry Exchange IT Modernization event. Top technology leaders will explore the latest IT modernization strategies and share actionable insights to help agencies optimize infrastructure, strengthen security and improve mission outcomes.\n\nThat process typically takes about 20 minutes, he said. The AI agent can get it done in 90 seconds — giving local and federal authorities more time to tackle the problem instead."
+              },
+              {
+                "title": "Pennsylvania Enacts Artificial Intelligence Deceptive Advertising Act | Inside Global Tech",
+                "url": "https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act",
+                "source": "insideglobaltech.com",
+                "summary": "consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic regulatory environment, including in connection with digital and online advertising, social media, AI-powered and agentic services, connected devices, and robotics. [...] Jayne counsels clients across industries to launch and enhance products, services, and governance programs involving their collection and use of data and emerging technologies. Her experience spans U.S. comprehensive privacy, automated decisionmaking, AI governance, biometric privacy, surveillance and algorithmic pricing, and AI transparency, disclosure, and safety frameworks. She partners with clients to design products and governance programs that keep pace with the dynamic regulatory"
+              },
+              {
+                "title": "Australia to introduce mandatory reporting after OpenAI hack to combat artificial intelligence ‘going rogue’",
+                "url": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack",
+                "source": "theguardian.com",
+                "summary": "Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded'"
+              }
+            ],
+            "template": "daily_ai_vn"
+          },
+          "result": {
+            "tool": "render_digest",
+            "template": "daily_ai_vn",
+            "markdown": "**Tin tức AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- Artificial intelligence.  Artificial intelligence. (credit: SHUTTERSTOCK)  Others fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate ... - [jpost.com](https://www.jpost.com/business-and-innovation/article-914414)\n- AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those ... - [cset.georgetown.edu](https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence)\n- MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.  Some economists believe AI poses a particular threat to entry-level and repetitive work, including call... - [fox10tv.com](https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity)\n- Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results wit... - [thedig.howard.edu](https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research)\n- a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before a... - [aws.amazon.com](https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore)\n- A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.  The previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, A... - [federalnewsnetwork.com](https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat)\n- consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic re... - [insideglobaltech.com](https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act)\n- Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded' - [theguardian.com](https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack)\n",
+            "item_count": 8
+          }
+        },
+        {
+          "tool": "send",
+          "args": {
+            "text": "**Tin tức AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- Artificial intelligence.  Artificial intelligence. (credit: SHUTTERSTOCK)  Others fear that increasingly autonomous AI will eventually become impossible to control. These concerns deserve serious attention, particularly as AI agents gain access to financial systems, corporate ... - [jpost.com](https://www.jpost.com/business-and-innovation/article-914414)\n- AGI has no universally accepted technical definition. In the U.S. frontier-model ecosystem, discussions commonly center on whether a system can reason, learn, and perform a wide range of tasks at broadly human levels—AGI—or substantially exceed human capabilities across those ... - [cset.georgetown.edu](https://cset.georgetown.edu/article/the-u-s-china-ai-competition-two-paths-to-artificial-general-intelligence)\n- MOBILE, Ala. (WALA) - Artificial intelligence is becoming a bigger part of everyday life, raising questions about what the technology could mean for workers and their jobs.  Some economists believe AI poses a particular threat to entry-level and repetitive work, including call... - [fox10tv.com](https://www.fox10tv.com/2026/11/10/ai-your-job-threat-or-opportunity)\n- Artificial intelligence is increasingly being used to support decision-making in areas critical to public infrastructure, such as transportation, emergency response, and national security. While today's AI technologies can analyze vast amounts of data, many produce results wit... - [thedig.howard.edu](https://thedig.howard.edu/all-stories/howard-professor-danda-b-rawat-receives-700000-nsf-award-ai-research)\n- a pre-loaded Chat) means operators see the value in their normal routine without having to go use a separate product. [...] cluster catch probabilistic model errors before they reach an operator or a piece of equipment. [...] 1. Unify the plant model and control logic before a... - [aws.amazon.com](https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore)\n- A military-made artificial intelligence tool helped law enforcement thwart a bomb threat at the FIFA World Cup in California this summer.  The previously undisclosed incident occurred June 18, when Switzerland faced Bosnia and Herzegovina at SoFi Stadium outside Los Angeles, A... - [federalnewsnetwork.com](https://federalnewsnetwork.com/artificial-intelligence/2026/11/military-made-ai-tool-helped-thwart-world-cup-bomb-threat)\n- consumer reviews, AI-generated content, and subscription autorenewals. Laura regularly represents both challengers and advertisers before the NAD, achieving favorable outcomes in matters involving artificial intelligence, influencers, and claim substantiation. [...] dynamic re... - [insideglobaltech.com](https://www.insideglobaltech.com/2026/11/09/pennsylvania-enacts-artificial-intelligence-deceptive-advertising-act)\n- Government flags criminal law changes to ensure companies can't argue in future 'that someone didn't know the computer was loaded' - [theguardian.com](https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack)",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "send_telegram",
+            "error": "RuntimeError",
+            "message": "Missing TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env var"
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T19:23:42"
+    }
+  ]
+}

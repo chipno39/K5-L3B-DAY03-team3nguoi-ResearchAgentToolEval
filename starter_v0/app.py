@@ -95,18 +95,14 @@ def reset_conversation() -> None:
         st.session_state.pop(key, None)
 
 
-def render_tool_events(rounds: list[dict[str, Any]]) -> None:
-    calls = [(r["round"], ev) for r in rounds for ev in r.get("tool_results", [])]
-    if not calls:
-        return
-    with st.expander(f"🔧 {len(calls)} tool call(s)", expanded=False):
-        for round_index, event in calls:
+def render_tool_errors(rounds: list[dict[str, Any]]) -> None:
+    """Tool call details live in the transcript; only tool errors are surfaced here
+    (the rubric does not accept a UI that hides tool errors)."""
+    for r in rounds:
+        for event in r.get("tool_results", []):
             result = event.get("result")
-            st.markdown(f"**Round {round_index} · `{event.get('tool')}`**")
-            st.json(event.get("args", {}), expanded=False)
             if isinstance(result, dict) and result.get("error"):
-                st.error(f"Tool error: {result.get('error')} — {result.get('message', '')}")
-            st.json(result, expanded=False)
+                st.caption(f"⚠️ Tool `{event.get('tool')}` lỗi: {result.get('error')} — {result.get('message', '')}")
 
 
 # ---------------- Sidebar: config ----------------
@@ -156,15 +152,6 @@ if st.session_state.get("config_key") != config_key:
 
 transcript = st.session_state.transcript
 
-with st.sidebar:
-    st.divider()
-    # Version evidence is also saved in every transcript; keep it collapsed for end users.
-    with st.expander("🔍 Thông tin kỹ thuật (version/hash)", expanded=False):
-        st.caption(f"artifact_version: `{transcript['artifact_version']}`")
-        st.caption(f"prompt_hash: `{transcript.get('prompt_hash', '')}`")
-        st.caption(f"tools_hash: `{transcript.get('tools_hash', '')}`")
-        st.caption(f"model: `{selected_model}`")
-        st.caption(f"Transcript: `{st.session_state.transcript_path.relative_to(ROOT)}`")
 
 # ---------------- Main: chat ----------------
 st.title("🔎 Research Agent")
@@ -191,7 +178,7 @@ for msg in st.session_state.messages:
                 st.info("Agent đang chờ bạn trả lời câu hỏi trên.")
             elif msg.get("status") in {"provider_error", "max_tool_rounds"}:
                 st.warning(f"status: {msg['status']}")
-            render_tool_events(msg.get("rounds", []))
+            render_tool_errors(msg.get("rounds", []))
 
 user_text = st.chat_input("Nhập yêu cầu research…") or st.session_state.pop("pending_input", None)
 
