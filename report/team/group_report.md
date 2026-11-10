@@ -31,7 +31,7 @@ UI (`starter_v0/app.py`) dùng chung vòng lặp tool với `chat.py`, giao di�
 
 **Link dùng thử (deploy):**
 
-> URL: `https://<điền-link>.trycloudflare.com` _(link tạm thời, chỉ sống khi lệnh `cloudflared` còn chạy)_
+> URL: https://clothing-systems-specification-relaxation.trycloudflare.com _(Cloudflare Quick Tunnel tới `localhost:8501`; link tạm thời, chỉ sống khi máy chạy UI và lệnh `cloudflared tunnel --url http://localhost:8501` còn chạy — mỗi lần chạy lại sẽ ra link mới)_
 
 ### A2. Tool agent có
 
@@ -137,7 +137,7 @@ Nhận xét: cả 3 loại hành vi cần chứng minh (yêu cầu thường, th
 |---|---|---|---|
 | Tool mới `research_deduplicate` | `starter_v0/tools/research_deduplicate/tool.py`, `TOOL.md` | Loại trùng URL chuẩn hóa, giữ thứ tự, không sửa đầu vào | Trả error dict khi `items` không phải list hoặc `url` không phải chuỗi |
 | Unit test tool mới | `starter_v0/tests/test_tools_todo.py` — `pytest`: 70 passed, 14 skipped, 0 failed | 3 test: happy path, input sai kiểu, URL không phải chuỗi | 14 skip còn lại là stub của tool có sẵn |
-| UI | `starter_v0/app.py`; lệnh chạy ở A1; `streamlit` trong `requirements.txt` | Streamlit dùng chung vòng lặp tool với `chat.py`; ghi transcript `*_ui_*`; chỉ liệt kê provider có API key | Lỗi tool luôn hiện cảnh báo (không che lỗi). **[TODO]** link dùng thử |
+| UI | `starter_v0/app.py`; lệnh chạy ở A1; `streamlit` trong `requirements.txt` | Streamlit dùng chung vòng lặp tool với `chat.py`; ghi transcript `*_ui_*`; chỉ liệt kê provider có API key | Lỗi tool luôn hiện cảnh báo (không che lỗi). Link dùng thử (Cloudflare Tunnel, tạm thời): https://clothing-systems-specification-relaxation.trycloudflare.com — đã kiểm tra từ ngoài, `/_stcore/health` trả 200 |
 
 Tool unit tests: 3 test cho tool mới; ví dụ lỗi unit test bắt được mà eval không bắt: `item["url"] = 123` phải trả `{"error": "TypeError"}` (đầu vào model không bao giờ gửi qua eval). Tương tự, eval G05 chỉ kiểm tra model **gọi** `research_deduplicate`; nếu tool quên chuẩn hóa dấu `/` cuối thì eval vẫn PASS nhưng `test_my_new_tool_happy_path` FAIL (`unique_count` 4 thay vì 3).
 
